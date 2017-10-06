@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodeOutputComponent implements OnInit {
 
+code = `
+  public class HelloWorld {
+    
+    public static void main(String[] args) {
+      System.out.println("Hello, World");
+    }
+    
+  }`;
+  
   constructor() { }
 
   ngOnInit() {
