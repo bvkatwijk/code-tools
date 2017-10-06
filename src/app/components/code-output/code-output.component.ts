@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-code-output',
@@ -7,15 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodeOutputComponent implements OnInit {
 
-code = `
-  public class HelloWorld {
-    
-    public static void main(String[] args) {
-      System.out.println("Hello, World");
-    }
-    
-  }`;
-  
+  @Input() code;
+
   constructor() { }
 
   ngOnInit() {
