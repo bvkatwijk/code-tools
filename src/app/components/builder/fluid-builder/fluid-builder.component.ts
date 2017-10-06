@@ -9,6 +9,8 @@ export class FluidBuilderComponent implements OnInit {
 
   public isCollapsed = false;
 
+  code = "public class HelloWorld {\n\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello, World\");\n\t}\n\n}";
+
   constructor() { }
 
   ngOnInit() {
