@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FluidBuilderComponent implements OnInit {
 
+  public isCollapsed = false;
   code = `
   public class HelloWorld {
     
