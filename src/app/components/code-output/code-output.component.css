@@ -1,5 +1,10 @@
-.app-code-output {
+.co {
     resize: none;
     width: 100%;
     height: 50vh;
+}
+
+.co-pre {
+    margin: 0px;
+    height: 100%;
 }
