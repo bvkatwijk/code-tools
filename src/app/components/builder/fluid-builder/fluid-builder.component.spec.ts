@@ -8,9 +8,9 @@ describe('FluidBuilderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FluidBuilderComponent ]
+      declarations: [FluidBuilderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +22,5 @@ describe('FluidBuilderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
