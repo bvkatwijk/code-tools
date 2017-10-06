@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FluidBuilderComponent } from './fluid-builder.component';
@@ -8,7 +9,8 @@ describe('FluidBuilderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FluidBuilderComponent]
+      declarations: [FluidBuilderComponent],
+      imports: [NgbModule.forRoot()]
     })
       .compileComponents();
   }));
