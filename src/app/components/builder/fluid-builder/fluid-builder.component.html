@@ -1,1 +1,25 @@
 <pre><code class="language-java">{{code}}</code></pre>
+<p>
+  <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseExample">
+          Toggle
+        </button>
+</p>
+<div id="collapseExample" [ngbCollapse]="isCollapsed">
+  <div class="card">
+    <div class="card-body">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <app-code-input></app-code-input>
+          </div>
+          <div class="col-md-6">
+            <app-code-input></app-code-input>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
