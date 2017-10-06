@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -10,7 +11,8 @@ describe('FluidBuilderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FluidBuilderComponent],
-      imports: [NgbModule.forRoot()]
+      imports: [NgbModule.forRoot()],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));
