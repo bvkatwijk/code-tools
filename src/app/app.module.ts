@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { FluidBuilderComponent } from './components/builder/fluid-builder/fluid-builder.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FluidBuilderComponent
   ],
   imports: [
     BrowserModule,
