@@ -7,12 +7,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { FluidBuilderComponent } from './components/builder/fluid-builder/fluid-builder.component';
 import { CodeInputComponent } from './components/code-input/code-input.component';
+import { CodeOutputComponent } from './components/code-output/code-output.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FluidBuilderComponent,
-    CodeInputComponent
+    CodeInputComponent,
+    CodeOutputComponent
   ],
   imports: [
     BrowserModule,
