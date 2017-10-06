@@ -21,4 +21,4 @@ before_install:
 before_script:
   - npm install -g @angular/cli
 
-script: ng test --single-run
+script: ng test --single-run --progress false
