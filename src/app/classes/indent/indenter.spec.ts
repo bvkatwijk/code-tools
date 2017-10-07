@@ -45,4 +45,20 @@ describe('Indenter', () => {
 
     });
 
+    it("should indent java method correctly", () => {
+        let method =
+            "@Override"
+            + "\n" + "public BuildSingleFieldSample firstField(String firstField) {"
+            + "\n" + "\tthis.firstField = firstField;"
+            + "\n" + "\treturn this;"
+            + "\n" + "}";
+        let indentedMethod =
+            "\t@Override"
+            + "\n\t" + "public BuildSingleFieldSample firstField(String firstField) {"
+            + "\n\t" + "\tthis.firstField = firstField;"
+            + "\n\t" + "\treturn this;"
+            + "\n\t" + "}";
+        expect(new Indenter().indent(method)).toEqual(indentedMethod);
+    });
+
 });
