@@ -12,8 +12,6 @@ export class FluidBuilderConverter {
         const fields = result.getFields();
         const target = result.getName();
         const targetBuild = new Build(target, this.indenter);
-
-        const buildTrait = this.indenter.indent(targetBuild.trait());
         // console.log('generated: ');
         // console.log(JSON.stringify(buildTrait));
         // console.log(buildTrait.replace(/\n/g,'\\n').replace(/\t/,'\\t'));
@@ -42,10 +40,7 @@ public class SingleFieldSample {
             return this;
         }
 
-        @Override
-        public SingleFieldSample build() {
-            return new SingleFieldSample(firstField);
-        }
+` + this.indenter.indent(this.indenter.indent(targetBuild.method('firstField'))) + `
 
     }
 
@@ -53,7 +48,7 @@ public class SingleFieldSample {
         public BuildSingleFieldSample firstField(String firstField);
     }
 
-` + buildTrait + `
+` + this.indenter.indent(targetBuild.trait()) + `
 
 }
 `;
