@@ -10,15 +10,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <app-code-input [(code)]="code"></app-code-input>
+                        <app-code-input (codeSubject)="updateCode($event)"></app-code-input>
                     </div>
                     <div class="col-md-6">
-                        <app-code-output [code]="code"></app-code-output>
+                        <app-code-output [code]="result"></app-code-output>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    {{code}}
 </div>
