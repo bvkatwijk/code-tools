@@ -1,17 +1,15 @@
 import { Field } from "app/classes/parse/field/field";
 import { Visibility, PUBLIC } from "app/classes/parse/visibility/visibility";
-
+import * as javaParser from 'java-parser';
 
 export class JavaParser {
-
-    javaParser: any = require("java-parser");
 
     constructor() { }
 
     parse(value: string): void {
-        let field = this.javaParser.parse(value).types[0].bodyDeclarations[0];
+        let field = javaParser.parse(value).types[0].bodyDeclarations[0];
 
-        this.getFields(this.javaParser.parse(value).types[0].bodyDeclarations);
+        this.getFields(javaParser.parse(value).types[0].bodyDeclarations);
     }
 
     getFields(bodyDeclarations: any[]): Array<Field> {
