@@ -1,21 +1,32 @@
 import { Field } from "app/classes/parse/field/field";
-import { Visibility, PUBLIC } from "app/classes/parse/visibility/visibility";
+import { Visibility, PUBLIC, Visibilities } from "app/classes/parse/visibility/visibility";
 import * as javaParser from 'java-parser';
 
 export class JavaParser {
 
-    constructor() { }
+    parsedFile: any;
 
-    parse(value: string): void {
-        let field = javaParser.parse(value).types[0].bodyDeclarations[0];
-
-        this.getFields(javaParser.parse(value).types[0].bodyDeclarations);
+    constructor(
+        readonly value: string
+    ) {
+        this.parsedFile = javaParser.parse(value);
     }
 
-    getFields(bodyDeclarations: any[]): Array<Field> {
-        return bodyDeclarations
+    getFields(): Array<Field> {
+        return this
+            .parsedFile
+            .types[0]
+            .bodyDeclarations
             .filter(it => this.isFieldDeclaration(it))
             .map(it => this.toField(it));
+    }
+
+    getName(): string {
+        return this
+        .parsedFile
+        .types[0]
+        .name
+        .identifier;
     }
 
     private isFieldDeclaration(bodyDeclaration: any): boolean {
@@ -24,7 +35,7 @@ export class JavaParser {
 
     private toField(fieldDeclaration: any): Field {
         return new Field(
-            PUBLIC, // VisibilityFinder.fromFieldDeclaration(fieldDeclaration.modifiers),
+            new Visibilities().fromStrings(fieldDeclaration.modifiers.map(it => it.keyword)),
             true,
             fieldDeclaration.type.name.identifier,
             fieldDeclaration.fragments[0].name.identifier,
