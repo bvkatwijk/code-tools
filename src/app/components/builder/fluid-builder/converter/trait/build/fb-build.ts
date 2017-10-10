@@ -20,10 +20,11 @@ export class Build {
             + "\n}";
     }
 
-    method(): string {
+    method(firstField: string): string {
         return "@Override"
             + "\npublic " + this.target + " build() {"
-            + "\n" + this.indenter.indent("return new " + this.target + "();")
+            + "\n" + this.indenter.indent("return new " + this.target + "(" + firstField + ");")
             + "\n}";
     }
+
 }
