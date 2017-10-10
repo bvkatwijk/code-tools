@@ -1,9 +1,24 @@
 import { JavaParser } from "app/classes/parse/parse";
+import { Build } from "app/components/builder/fluid-builder/converter/trait/build/fb-build";
+import { Indenter } from "app/classes/indent/indenter";
 
 
 export class FluidBuilderConverter {
 
-    readonly singleFieldClassTarget = `package org.bvkatwijk.fbg.sample;
+    readonly indenter = new Indenter('    ');
+
+    convert(value: string): string {
+        let result = new JavaParser(value);
+        const fields = result.getFields();
+        const target = result.getName();
+        const targetBuild = new Build(target, this.indenter);
+
+        const buildTrait = this.indenter.indent(targetBuild.trait());
+        // console.log('generated: ');
+        // console.log(JSON.stringify(buildTrait));
+        // console.log(buildTrait.replace(/\n/g,'\\n').replace(/\t/,'\\t'));
+
+        return `package org.bvkatwijk.fbg.sample;
 
 import lombok.Value;
 
@@ -38,16 +53,10 @@ public class SingleFieldSample {
         public BuildSingleFieldSample firstField(String firstField);
     }
 
-    public static interface BuildSingleFieldSample {
-        public SingleFieldSample build();
-    }
+` + buildTrait + `
 
 }
 `;
-
-    convert(value: string) {
-        new JavaParser().parse(value);
-        return this.singleFieldClassTarget;
     }
 
 }
