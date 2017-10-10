@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FluidBuilderConverter } from 'app/components/builder/fluid-builder/converter/fb-converter';
 
 @Component({
   selector: 'app-fluid-builder',
@@ -8,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class FluidBuilderComponent implements OnInit {
 
   public isCollapsed = false;
-
-  code = "public class HelloWorld {\n\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello, World\");\n\t}\n\n}";
+  result: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateCode(code: string) {
+    this.result = new FluidBuilderConverter().convert(code);
   }
 
 }
