@@ -16,8 +16,8 @@ export class With implements TraitAndMethod {
 
     method(): string {
         return "@Override"
-            + "\npublic " + this.targetType + " firstField(String firstField) {"
-            + "\n\tthis.firstField = firstField;"
+            + "\npublic " + this.targetType + " " + this.fieldName + "(String " + this.fieldName + ") {"
+            + "\n\tthis." + this.fieldName + " = " + this.fieldName + ";"
             + "\n\treturn this;"
             + "\n}";
     }
