@@ -4,8 +4,8 @@ import { Field } from '../../../../../../classes/parse/field/field';
 export class With implements TraitAndMethod {
 
     constructor(
-        readonly from: string,
-        readonly to: string,
+        readonly fieldName: string,
+        readonly targetType: string,
     ) {
 
     }
@@ -16,7 +16,7 @@ export class With implements TraitAndMethod {
 
     method(): string {
         return "@Override"
-            + "\npublic BuildSingleFieldSample firstField(String firstField) {"
+            + "\npublic " + this.targetType + " firstField(String firstField) {"
             + "\n\tthis.firstField = firstField;"
             + "\n\treturn this;"
             + "\n}";
