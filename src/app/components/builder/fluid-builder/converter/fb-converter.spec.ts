@@ -5,7 +5,9 @@ import { FluidBuilderConverter } from './fb-converter';
 
 describe('Fluid Builder Converter', () => {
 
-    const singleFieldClassSource = `package org.bvkatwijk.fbg.sample;
+    describe('first example', () => {
+
+        const singleFieldClassSource = `package org.bvkatwijk.fbg.sample;
 
 import lombok.Value;
 
@@ -17,7 +19,7 @@ public class SingleFieldSample {
 }
 `;
 
-    const singleFieldClassTarget = `package org.bvkatwijk.fbg.sample;
+        const singleFieldClassTarget = `package org.bvkatwijk.fbg.sample;
 
 import lombok.Value;
 
@@ -59,10 +61,12 @@ public class SingleFieldSample {
 }
 `;
 
-    it('should convert single field class to valid fluid builder implementation', () => {
-        new StringHelper().assertEquals(
-            new FluidBuilderConverter().convert(singleFieldClassSource),
-            singleFieldClassTarget);
+        it('should be converted to valid fluid builder implementation', () => {
+            new StringHelper().assertEquals(
+                new FluidBuilderConverter().convert(singleFieldClassSource),
+                singleFieldClassTarget);
+        });
+
     });
 
 });
