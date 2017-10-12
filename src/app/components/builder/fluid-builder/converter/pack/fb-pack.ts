@@ -9,13 +9,15 @@ export class Package {
     }
 
     getDeclaration(): string {
-        console.log(this.packageJson);
-        return 'package ' + this.packageJson.package.name.identifier + ';';
+        return 'package ' + this.getSegments(this.packageJson.package.name) + ';';
     }
 
-    getSegments(declaration: any) {
-        console.log('Retrieving segment of ', declaration);
-        // if(declaration.name)
+    getSegments(it: any) {
+        if(it.identifier) {
+            return it.identifier;
+        } else {
+            return it.qualifier.identifier + '.' + it.name.identifier;
+        }
     }
 
 
