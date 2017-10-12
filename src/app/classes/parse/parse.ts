@@ -23,10 +23,10 @@ export class JavaParser {
 
     getName(): string {
         return this
-        .parsedFile
-        .types[0]
-        .name
-        .identifier;
+            .parsedFile
+            .types[0]
+            .name
+            .identifier;
     }
 
     private isFieldDeclaration(bodyDeclaration: any): boolean {
