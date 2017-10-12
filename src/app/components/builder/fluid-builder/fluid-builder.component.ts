@@ -13,8 +13,7 @@ export class FluidBuilderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   updateCode(code: string) {
     this.result = new FluidBuilderConverter().convert(code);
