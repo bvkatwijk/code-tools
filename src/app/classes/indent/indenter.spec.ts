@@ -26,6 +26,7 @@ describe('Indenter', () => {
             });
 
         });
+
     });
 
     describe('using spaces', () => {
