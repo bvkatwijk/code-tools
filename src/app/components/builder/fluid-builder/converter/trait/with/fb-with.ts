@@ -11,7 +11,9 @@ export class With implements TraitAndMethod {
     }
 
     trait(): string {
-        return '';
+        return "public static interface WithFirstField {"
+            + "\n\tpublic " + this.targetType + " firstField(String firstField);"
+            + "\n}"
     }
 
     method(): string {

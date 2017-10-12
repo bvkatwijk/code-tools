@@ -4,6 +4,22 @@ describe("With", () => {
 
     describe("trait", () => {
 
+        it('should be created for firstField and BuildSingleFieldSample', () => {
+            let expected =
+                "public static interface WithFirstField {"
+                + "\n\tpublic BuildSingleFieldSample firstField(String firstField);"
+                + "\n}"
+            expect(new With('firstField', 'BuildSingleFieldSample').trait()).toEqual(expected);
+        });
+
+        it('should be created for firstField and TypeName', () => {
+            let expected =
+                "public static interface WithFirstField {"
+                + "\n\tpublic TypeName firstField(String firstField);"
+                + "\n}"
+            expect(new With('firstField', 'TypeName').trait()).toEqual(expected);
+        });
+
     });
 
     describe("method", () => {
