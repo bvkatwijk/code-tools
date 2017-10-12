@@ -1,3 +1,4 @@
+import { FluidBuilderClass } from './class/fb-class';
 import { Field } from '../../../../classes/parse/field/field';
 import { With } from './trait/with/fb-with';
 import { JavaParser } from 'app/classes/parse/parse';
@@ -39,19 +40,9 @@ export class FluidBuilderConverter {
         ].join('\n\n') + '\n';
     }
 
-    private builderClassDeclaration(): string {
-        return '/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */'
-            + '\npublic static class SingleFieldSampleBuilder implements WithFirstField, BuildSingleFieldSample {';
-    }
-
-    private builderClassBody(fields: Field[], methods: string[], targetBuild: any): string {
-        return this
-            .indenter
-            .indent([
-            this.mutableFieldDeclarations(fields),
-                methods.join('\n\n'),
-                targetBuild.method('firstField')
-            ].join('\n\n'));
+    private builderClassDeclaration(fields: Field[], methods: string[], targetBuild: Build,): string {
+        return new FluidBuilderClass(this.indenter)
+            .declarationAndBody(fields, methods, targetBuild);
     }
 
     private builderMethodDeclaration(): string {
@@ -73,13 +64,11 @@ export class FluidBuilderConverter {
             + '\npublic class SingleFieldSample {';
     }
 
-    private sourceClassBody(fields: Field[], methods: string[], targetBuild: any, traits: any[]): string {
+    private sourceClassBody(fields: Field[], methods: string[], targetBuild: Build, traits: any[]): string {
         return this.indenter.indent([
             this.immutableFieldDeclarations(fields),
             this.builderMethodDeclaration(),
-            this.builderClassDeclaration(),
-            this.builderClassBody(fields, methods, targetBuild),
-            '}',
+            this.builderClassDeclaration(fields, methods, targetBuild),
             traits.join('\n\n'),
             targetBuild.trait()
         ].join('\n\n'));
