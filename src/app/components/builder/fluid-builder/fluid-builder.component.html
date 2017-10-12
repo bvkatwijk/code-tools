@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <app-code-input (codeSubject)="updateCode($event)"></app-code-input>
+                        <app-code-input (codeChange)="updateCode($event)"></app-code-input>
                     </div>
                     <div class="col-md-6">
                         <app-code-output [code]="result"></app-code-output>
