@@ -2,19 +2,19 @@ import { Field } from 'app/classes/parse/field/field';
 import { Visibility, PUBLIC, Visibilities } from 'app/classes/parse/visibility/visibility';
 import * as javaParser from 'java-parser';
 
-export class JavaParser {
+export class JavaClass {
 
-    parsedFile: any;
+    readonly result: any;
 
     constructor(
-        readonly value: string
+        readonly source: string
     ) {
-        this.parsedFile = javaParser.parse(value);
+        this.result = javaParser.parse(source);
     }
 
     getFields(): Array<Field> {
         return this
-            .parsedFile
+            .result
             .types[0]
             .bodyDeclarations
             .filter(it => this.isFieldDeclaration(it))
@@ -23,7 +23,7 @@ export class JavaParser {
 
     getName(): string {
         return this
-            .parsedFile
+            .result
             .types[0]
             .name
             .identifier;
