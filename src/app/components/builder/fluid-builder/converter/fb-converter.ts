@@ -80,10 +80,4 @@ export class FluidBuilderConverter {
             .join('\n');
     }
 
-    private mutableFieldDeclarations(fields: Field[]): string {
-        return fields
-            .map(it => it.mutableDeclaration())
-            .join('\n');
-    }
-
 }
