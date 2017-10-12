@@ -21,6 +21,12 @@ export class JavaClass {
             .map(it => this.toField(it));
     }
 
+    getPackage(): any {
+        return this
+            .result
+            .package;
+    }
+
     getName(): string {
         return this
             .result
