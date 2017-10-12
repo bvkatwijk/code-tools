@@ -1,3 +1,5 @@
+import { StringHelper } from '../../../../classes/string/string-helper';
+import { Whitespace } from '../../../../classes/whitespace/whitespace';
 import { FluidBuilderConverter } from './fb-converter';
 
 
@@ -58,7 +60,7 @@ public class SingleFieldSample {
 `;
 
     it("should convert single field class to valid fluid builder implementation", () => {
-        expect(new FluidBuilderConverter().convert(singleFieldClassSource)).toEqual(singleFieldClassTarget);
+        new StringHelper().assertEquals(new FluidBuilderConverter().convert(singleFieldClassSource), singleFieldClassTarget);
     });
 
 });
