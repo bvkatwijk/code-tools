@@ -9,15 +9,21 @@ export class Package {
     }
 
     getDeclaration(): string {
-        return 'package ' + this.getSegments(this.packageJson.package.name) + ';';
+        return 'package ' + this.getPackageName(this.packageJson.name) + ';';
     }
 
-    getSegments(it: any) {
-        if(it.identifier) {
-            return it.identifier;
-        } else {
-            return it.qualifier.identifier + '.' + it.name.identifier;
+    getPackageName(it: any): string {
+        let packageName = '';
+        if (it.identifier) {
+            packageName = it.identifier;
         }
+        if (it.name) {
+            packageName = this.getPackageName(it.name) + packageName;
+        }
+        if (it.qualifier) {
+            packageName = this.getPackageName(it.qualifier) + '.' + packageName;
+        }
+        return packageName;
     }
 
 

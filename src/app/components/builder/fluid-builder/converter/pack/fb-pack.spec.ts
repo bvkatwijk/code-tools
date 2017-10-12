@@ -3,29 +3,24 @@ import { Package } from './fb-pack';
 describe("Package", () => {
 
     const a = JSON.parse(`{
-    "package": {
         "node": "PackageDeclaration",
         "name": {
             "identifier": "a",
             "node": "SimpleName"
         },
         "annotations": []
-    }
-}`);
+    }`);
 
     const b = JSON.parse(`{
-    "package": {
         "node": "PackageDeclaration",
         "name": {
             "identifier": "b",
             "node": "SimpleName"
         },
         "annotations": []
-    }
-}`);
+    }`);
 
     const ab = JSON.parse(`{
-    "package": {
         "node": "PackageDeclaration",
         "name": {
             "node": "QualifiedName",
@@ -39,11 +34,9 @@ describe("Package", () => {
             }
         },
         "annotations": []
-    }
-}`);
+    }`);
 
     const abc = JSON.parse(`{
-    "package": {
         "node": "PackageDeclaration",
         "name": {
             "node": "QualifiedName",
@@ -64,8 +57,37 @@ describe("Package", () => {
             }
         },
         "annotations": []
-    }
-}`);
+    }`);
+
+    const abcd = JSON.parse(`{
+        "node": "PackageDeclaration",
+        "name": {
+            "node": "QualifiedName",
+            "qualifier": {
+                "node": "QualifiedName",
+                "qualifier": {
+                    "node": "QualifiedName",
+                    "qualifier": {
+                        "identifier": "a",
+                        "node": "SimpleName"
+                    },
+                    "name": {
+                        "identifier": "b",
+                        "node": "SimpleName"
+                    }
+                },
+                "name": {
+                    "identifier": "c",
+                    "node": "SimpleName"
+                }
+            },
+            "name": {
+                "identifier": "d",
+                "node": "SimpleName"
+            }
+        },
+        "annotations": []
+    }`);
 
     it('should be parsed correctly for a', () => {
         expect(new Package(a).getDeclaration()).toEqual('package a;');
@@ -78,5 +100,14 @@ describe("Package", () => {
     it('should be parsed correctly for a.b', () => {
         expect(new Package(ab).getDeclaration()).toEqual('package a.b;');
     });
+
+    it('should be parsed correctly for a.b.c', () => {
+        expect(new Package(abc).getDeclaration()).toEqual('package a.b.c;');
+    });
+
+    it('should be parsed correctly for a.b.c.d', () => {
+        expect(new Package(abcd).getDeclaration()).toEqual('package a.b.c.d;');
+    });
+
 
 });
