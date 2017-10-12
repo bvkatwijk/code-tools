@@ -1,8 +1,17 @@
+import { Indenter } from '../../../../../../classes/indent/indenter';
 import { With } from './fb-with';
 
 describe("With", () => {
 
     describe("trait", () => {
+
+        it('uses dynamic indentation', () => {
+            let expected =
+                "public static interface WithFirstField {"
+                + "\n    public BuildSingleFieldSample firstField(String firstField);"
+                + "\n}"
+            expect(new With('firstField', 'BuildSingleFieldSample', new Indenter('    ')).trait()).toEqual(expected);
+        });
 
         it('should be created for firstField and BuildSingleFieldSample', () => {
             let expected =
@@ -40,6 +49,16 @@ describe("With", () => {
                 + "\n\treturn this;"
                 + "\n}";
             expect(new With('firstField', 'BuildSingleFieldSample').method()).toEqual(expected);
+        });
+
+        it('uses dynamic indentation', () => {
+            let expected =
+                "@Override"
+                + "\npublic BuildSingleFieldSample firstField(String firstField) {"
+                + "\n    this.firstField = firstField;"
+                + "\n    return this;"
+                + "\n}";
+            expect(new With('firstField', 'BuildSingleFieldSample', new Indenter('    ')).method()).toEqual(expected);
         });
 
         it('should be created for firstField and TypeName', () => {
