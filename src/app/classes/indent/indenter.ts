@@ -9,9 +9,13 @@ export class Indenter {
     indent(code: string): string {
         return code
             .split('\n')
-            .map(it => this.indentation + it)
+            .map(it => this.indentLine(it))
             .map(it => this.trimEmpty(it))
             .join('\n');
+    }
+
+    private indentLine(line: string): string {
+        return this.indentation + line;
     }
 
     private trimEmpty(it: string): string {
