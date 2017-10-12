@@ -12,19 +12,21 @@ export class FluidBuilderConverter {
         let result = new JavaParser(value);
         const fields = result.getFields();
         const target = result.getName();
+        const methods: string[] = [];
         const traits: string[] = [];
-        for(var i: number = 0; i < fields.length; i++) {
-            if(fields[i+1]) {
-                traits.push(new With(fields[i].name, fields[i+1].name, this.indenter).trait());
+        for (var i: number = 0; i < fields.length; i++) {
+            if (fields[i + 1]) {
+                const nextWith = new With(fields[i].name, fields[i + 1].name, this.indenter);
+                methods.push(nextWith.method());
+                traits.push(nextWith.trait());
             } else {
-                traits.push(new With(fields[i].name, 'Build' + target, this.indenter).trait());
+                const nextWith = new With(fields[i].name, 'Build' + target, this.indenter);
+                methods.push(nextWith.method());
+                traits.push(nextWith.trait());
             }
         }
 
         const targetBuild = new Build(target, this.indenter);
-        // console.log('generated: ');
-        // console.log(JSON.stringify(buildTrait));
-        // console.log(buildTrait.replace(/\n/g,'\\n').replace(/\t/,'\\t'));
 
         return `package org.bvkatwijk.fbg.sample;
 
@@ -44,11 +46,7 @@ public class SingleFieldSample {
 
         private String firstField;
 
-        @Override
-        public BuildSingleFieldSample firstField(String firstField) {
-            this.firstField = firstField;
-            return this;
-        }
+` + this.indenter.indent(this.indenter.indent(methods[0])) + `
 
 ` + this.indenter.indent(this.indenter.indent(targetBuild.method('firstField'))) + `
 
