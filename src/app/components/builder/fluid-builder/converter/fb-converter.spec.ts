@@ -60,7 +60,9 @@ public class SingleFieldSample {
 `;
 
     it("should convert single field class to valid fluid builder implementation", () => {
-        new StringHelper().assertEquals(new FluidBuilderConverter().convert(singleFieldClassSource), singleFieldClassTarget);
+        new StringHelper().assertEquals(
+            new FluidBuilderConverter().convert(singleFieldClassSource),
+            singleFieldClassTarget);
     });
 
 });
