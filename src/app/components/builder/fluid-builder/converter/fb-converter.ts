@@ -1,3 +1,4 @@
+import { Package } from './pack/fb-pack';
 import { FluidBuilderClass } from './class/fb-class';
 import { Field } from '../../../../classes/parse/field/field';
 import { With } from './trait/with/fb-with';
@@ -12,6 +13,7 @@ export class FluidBuilderConverter {
 
     convert(value: string): string {
         const result = new JavaClass(value);
+        const pack = new Package(result.getPackage());
         const fields = result.getFields();
         const target = result.getName();
 
@@ -32,7 +34,7 @@ export class FluidBuilderConverter {
         const targetBuild = new Build(target, this.indenter);
 
         return [
-            this.packageDeclaration(),
+            pack.getDeclaration(),
             this.importStatements(),
             this.sourceClassDeclaration(),
             this.sourceClassBody(fields, methods, targetBuild, traits),
@@ -49,10 +51,6 @@ export class FluidBuilderConverter {
         return 'public static WithFirstField builder() {'
             + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
             + '\n}';
-    }
-
-    private packageDeclaration(): string {
-        return 'package org.bvkatwijk.fbg.sample;';
     }
 
     private importStatements(): string {
