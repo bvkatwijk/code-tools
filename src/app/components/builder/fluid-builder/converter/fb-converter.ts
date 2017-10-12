@@ -1,3 +1,4 @@
+import { With } from './trait/with/fb-with';
 import { JavaParser } from "app/classes/parse/parse";
 import { Build } from "app/components/builder/fluid-builder/converter/trait/build/fb-build";
 import { Indenter } from "app/classes/indent/indenter";
@@ -11,6 +12,15 @@ export class FluidBuilderConverter {
         let result = new JavaParser(value);
         const fields = result.getFields();
         const target = result.getName();
+        const traits: string[] = [];
+        for(var i: number = 0; i < fields.length; i++) {
+            if(fields[i+1]) {
+                traits.push(new With(fields[i].name, fields[i+1].name, this.indenter).trait());
+            } else {
+                traits.push(new With(fields[i].name, 'Build' + target, this.indenter).trait());
+            }
+        }
+
         const targetBuild = new Build(target, this.indenter);
         // console.log('generated: ');
         // console.log(JSON.stringify(buildTrait));
@@ -44,9 +54,7 @@ public class SingleFieldSample {
 
     }
 
-    public static interface WithFirstField {
-        public BuildSingleFieldSample firstField(String firstField);
-    }
+` + this.indenter.indent(traits[0]) + `
 
 ` + this.indenter.indent(targetBuild.trait()) + `
 
