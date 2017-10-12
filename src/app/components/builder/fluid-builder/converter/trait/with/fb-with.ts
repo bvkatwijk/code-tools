@@ -1,3 +1,4 @@
+import { capitalize } from '../../../../../../classes/capitalize/capitalizer';
 import { TraitAndMethod } from '../../../../../../classes/trait-method';
 import { Field } from '../../../../../../classes/parse/field/field';
 
@@ -11,8 +12,8 @@ export class With implements TraitAndMethod {
     }
 
     trait(): string {
-        return "public static interface WithFirstField {"
-            + "\n\tpublic " + this.targetType + " firstField(String firstField);"
+        return "public static interface With" + capitalize(this.fieldName) + " {"
+            + "\n\tpublic " + this.targetType + " " + this.fieldName + "(String " + this.fieldName + ");"
             + "\n}"
     }
 

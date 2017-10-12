@@ -20,6 +20,14 @@ describe("With", () => {
             expect(new With('firstField', 'TypeName').trait()).toEqual(expected);
         });
 
+        it('should be created for fieldName and TypeName', () => {
+            let expected =
+                "public static interface WithFieldName {"
+                + "\n\tpublic TypeName fieldName(String fieldName);"
+                + "\n}"
+            expect(new With('fieldName', 'TypeName').trait()).toEqual(expected);
+        });
+
     });
 
     describe("method", () => {
