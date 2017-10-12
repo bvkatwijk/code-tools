@@ -9,4 +9,18 @@ export class Field {
         readonly name: string,
     ) { }
 
+    declaration(): string {
+        return this.isFinal
+            ? this.immutableDeclaration()
+            : this.mutableDeclaration();
+    }
+
+    immutableDeclaration(): string {
+        return this.visibility.name + " final " + this.type + " " + this.name + ";";
+    }
+
+    mutableDeclaration(): string {
+        return this.visibility.name + " " + this.type + " " + this.name + ";";
+    }
+
 }
