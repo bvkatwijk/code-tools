@@ -44,17 +44,17 @@ public class SingleFieldSample {
     /** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
     public static class SingleFieldSampleBuilder implements WithFirstField, BuildSingleFieldSample {
 
-        private String firstField;
+` + this.indenter.indent(this.indenter.indent(fields[0].mutableDeclaration() + `
 
-` + this.indenter.indent(this.indenter.indent(methods[0])) + `
+` + methods[0] + `
 
-` + this.indenter.indent(this.indenter.indent(targetBuild.method('firstField'))) + `
+` + targetBuild.method('firstField'))) + `
 
     }
 
-` + this.indenter.indent(traits[0]) + `
+` + this.indenter.indent(traits[0] + `
 
-` + this.indenter.indent(targetBuild.trait()) + `
+` + targetBuild.trait()) + `
 
 }
 `;
