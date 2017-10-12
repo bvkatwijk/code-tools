@@ -1,4 +1,4 @@
-import { StringHelper } from '../../../../classes/string/string-helper';
+import { StringHelper } from '../../../../classes/string/string-helper.spec';
 import { Whitespace } from '../../../../classes/whitespace/whitespace';
 import { FluidBuilderConverter } from './fb-converter';
 
