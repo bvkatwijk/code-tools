@@ -16,11 +16,11 @@ export class Field {
     }
 
     immutableDeclaration(): string {
-        return this.visibility.name + " final " + this.type + " " + this.name + ";";
+        return this.visibility.name + ' final ' + this.type + ' ' + this.name + ';';
     }
 
     mutableDeclaration(): string {
-        return this.visibility.name + " " + this.type + " " + this.name + ";";
+        return this.visibility.name + ' ' + this.type + ' ' + this.name + ';';
     }
 
 }

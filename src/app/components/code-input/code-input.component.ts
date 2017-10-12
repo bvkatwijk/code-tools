@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CodeInputComponent implements OnInit {
 
-  @Input() code = "public class Example {\n\n\tpublic final String value;\n\n}";
+  @Input() code = 'public class Example {\n\n\tpublic final String value;\n\n}';
   @Output() codeChange = new EventEmitter();
 
   constructor() { }
