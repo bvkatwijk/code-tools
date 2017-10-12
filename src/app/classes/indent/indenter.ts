@@ -1,3 +1,4 @@
+import { Whitespace } from '../whitespace/whitespace';
 
 export class Indenter {
 
@@ -6,9 +7,18 @@ export class Indenter {
     }
 
     indent(code: string): string {
-        return this.indentation + code
+        return code
             .split('\n')
-            .join('\n' + this.indentation);
+            .map(it => this.indentation + it)
+            .map(it => this.trimEmpty(it))
+            .join('\n');
+    }
+
+    private trimEmpty(it: string): string {
+        if(it.trim() === '') {
+            return '';
+        }
+        return it;
     }
 
 }

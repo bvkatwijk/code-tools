@@ -1,3 +1,4 @@
+import { Whitespace } from '../whitespace/whitespace';
 import { Indenter } from './indenter';
 
 describe('Indenter', () => {
@@ -18,6 +19,10 @@ describe('Indenter', () => {
 
             it("should indent", () => {
                 expect(indenter.indent('firstLine\nSecondLine')).toEqual('\tfirstLine\n\tSecondLine');
+            });
+
+            it("should trim empty lines", () => {
+                expect(indenter.indent('firstLine\n\nSecondLine')).toEqual('\tfirstLine\n\n\tSecondLine');
             });
 
         });
