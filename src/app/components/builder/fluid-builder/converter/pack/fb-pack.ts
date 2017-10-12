@@ -10,8 +10,7 @@ export class Package {
 
     getDeclaration(): string {
         console.log(this.packageJson);
-        this.getSegments(this.packageJson);
-        return 'package a;';
+        return 'package ' + this.packageJson.package.name.identifier + ';';
     }
 
     getSegments(declaration: any) {

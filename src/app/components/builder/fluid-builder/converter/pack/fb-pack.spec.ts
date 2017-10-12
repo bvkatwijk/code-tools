@@ -71,4 +71,8 @@ describe("Package", () => {
         expect(new Package(a).getDeclaration()).toEqual('package a;');
     });
 
+    it('should be parsed correctly for b', () => {
+        expect(new Package(b).getDeclaration()).toEqual('package b;');
+    });
+
 });
