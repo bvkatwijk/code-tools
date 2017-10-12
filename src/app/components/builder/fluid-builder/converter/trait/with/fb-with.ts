@@ -14,17 +14,17 @@ export class With implements TraitAndMethod {
     }
 
     trait(): string {
-        return "public static interface With" + capitalize(this.fieldName) + " {"
-            + "\n" + this.indenter.indent("public " + this.targetType + " " + this.fieldName + "(String " + this.fieldName + ");")
-            + "\n}";
+        return 'public static interface With' + capitalize(this.fieldName) + ' {'
+            + '\n' + this.indenter.indent('public ' + this.targetType + ' ' + this.fieldName + '(String ' + this.fieldName + ');')
+            + '\n}';
     }
 
     method(): string {
-        return "@Override"
-            + "\npublic " + this.targetType + " " + this.fieldName + "(String " + this.fieldName + ") {"
-            + "\n" + this.indenter.indent("this." + this.fieldName + " = " + this.fieldName + ";")
-            + "\n" + this.indenter.indent("return this;")
-            + "\n}";
+        return '@Override'
+            + '\npublic ' + this.targetType + ' ' + this.fieldName + '(String ' + this.fieldName + ') {'
+            + '\n' + this.indenter.indent('this.' + this.fieldName + ' = ' + this.fieldName + ';')
+            + '\n' + this.indenter.indent('return this;')
+            + '\n}';
     }
 
 }

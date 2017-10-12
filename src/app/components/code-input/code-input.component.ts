@@ -20,6 +20,6 @@ export class CodeInputComponent implements OnInit {
     this.codeChange.emit(code);
   }
 
-  
+
 
 }

@@ -12,16 +12,16 @@ export class Build {
     }
 
     trait(): string {
-        return "public static interface Build" + this.target + " {"
-            + "\n" + this.indenter.indent("public " + this.target + " build();")
-            + "\n}";
+        return 'public static interface Build' + this.target + ' {'
+            + '\n' + this.indenter.indent('public ' + this.target + ' build();')
+            + '\n}';
     }
 
     method(firstField: string): string {
-        return "@Override"
-            + "\npublic " + this.target + " build() {"
-            + "\n" + this.indenter.indent("return new " + this.target + "(" + firstField + ");")
-            + "\n}";
+        return '@Override'
+            + '\npublic ' + this.target + ' build() {'
+            + '\n' + this.indenter.indent('return new ' + this.target + '(' + firstField + ');')
+            + '\n}';
     }
 
 }

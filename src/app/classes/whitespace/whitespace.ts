@@ -1,6 +1,6 @@
 
 /**
- * Helper class for verifying whitespaces 
+ * Helper class for verifying whitespaces
  */
 export class Whitespace {
 

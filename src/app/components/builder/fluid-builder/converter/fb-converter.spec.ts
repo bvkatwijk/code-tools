@@ -3,7 +3,7 @@ import { Whitespace } from '../../../../classes/whitespace/whitespace';
 import { FluidBuilderConverter } from './fb-converter';
 
 
-describe("Fluid Builder Converter", () => {
+describe('Fluid Builder Converter', () => {
 
     const singleFieldClassSource = `package org.bvkatwijk.fbg.sample;
 
@@ -59,7 +59,7 @@ public class SingleFieldSample {
 }
 `;
 
-    it("should convert single field class to valid fluid builder implementation", () => {
+    it('should convert single field class to valid fluid builder implementation', () => {
         new StringHelper().assertEquals(
             new FluidBuilderConverter().convert(singleFieldClassSource),
             singleFieldClassTarget);

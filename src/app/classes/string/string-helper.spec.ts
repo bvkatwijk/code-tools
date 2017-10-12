@@ -11,7 +11,7 @@ export class StringHelper {
         const oneLines = this.lines(one);
         const otherLines = this.lines(other);
 
-        for (var i = 0; i < oneLines.length; i++) {
+        for (let i = 0; i < oneLines.length; i++) {
             expect(this.whitespace.show(oneLines[i])).toEqual(this.whitespace.show(otherLines[i]));
         }
     }

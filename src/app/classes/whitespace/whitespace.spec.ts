@@ -1,8 +1,8 @@
 import { Whitespace } from './whitespace';
 
-describe("Whitespace converter", () => {
+describe('Whitespace converter', () => {
 
-    let whitespace = new Whitespace();
+    const whitespace = new Whitespace();
 
     describe('tabs', () => {
 

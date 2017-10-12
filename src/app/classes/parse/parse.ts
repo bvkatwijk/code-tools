@@ -1,5 +1,5 @@
-import { Field } from "app/classes/parse/field/field";
-import { Visibility, PUBLIC, Visibilities } from "app/classes/parse/visibility/visibility";
+import { Field } from 'app/classes/parse/field/field';
+import { Visibility, PUBLIC, Visibilities } from 'app/classes/parse/visibility/visibility';
 import * as javaParser from 'java-parser';
 
 export class JavaParser {
@@ -30,7 +30,7 @@ export class JavaParser {
     }
 
     private isFieldDeclaration(bodyDeclaration: any): boolean {
-        return bodyDeclaration.node === "FieldDeclaration";
+        return bodyDeclaration.node === 'FieldDeclaration';
     }
 
     private toField(fieldDeclaration: any): Field {

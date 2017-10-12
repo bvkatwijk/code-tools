@@ -5,23 +5,23 @@ describe('Indenter', () => {
 
     describe('using tabs', () => {
 
-        let indenter = new Indenter();
+        const indenter = new Indenter();
 
-        describe("on single line", () => {
+        describe('on single line', () => {
 
-            it("should indent", () => {
+            it('should indent', () => {
                 expect(indenter.indent('text')).toEqual('\ttext');
             });
 
         });
 
-        describe("on multiple lines", () => {
+        describe('on multiple lines', () => {
 
-            it("should indent", () => {
+            it('should indent', () => {
                 expect(indenter.indent('firstLine\nSecondLine')).toEqual('\tfirstLine\n\tSecondLine');
             });
 
-            it("should trim empty lines", () => {
+            it('should trim empty lines', () => {
                 expect(indenter.indent('firstLine\n\nSecondLine')).toEqual('\tfirstLine\n\n\tSecondLine');
             });
 
@@ -31,19 +31,19 @@ describe('Indenter', () => {
 
     describe('using spaces', () => {
 
-        let indenter = new Indenter('  ');
+        const indenter = new Indenter('  ');
 
-        describe("on single line", () => {
+        describe('on single line', () => {
 
-            it("should indent", () => {
+            it('should indent', () => {
                 expect(indenter.indent('text')).toEqual('  text');
             });
 
         });
 
-        describe("on multiple lines", () => {
+        describe('on multiple lines', () => {
 
-            it("should indent", () => {
+            it('should indent', () => {
                 expect(indenter.indent('firstLine\nSecondLine')).toEqual('  firstLine\n  SecondLine');
             });
 
@@ -51,19 +51,19 @@ describe('Indenter', () => {
 
     });
 
-    it("should indent java method correctly", () => {
-        let method =
-            "@Override"
-            + "\n" + "public BuildSingleFieldSample firstField(String firstField) {"
-            + "\n" + "\tthis.firstField = firstField;"
-            + "\n" + "\treturn this;"
-            + "\n" + "}";
-        let indentedMethod =
-            "\t@Override"
-            + "\n\t" + "public BuildSingleFieldSample firstField(String firstField) {"
-            + "\n\t" + "\tthis.firstField = firstField;"
-            + "\n\t" + "\treturn this;"
-            + "\n\t" + "}";
+    it('should indent java method correctly', () => {
+        const method =
+            '@Override'
+            + '\n' + 'public BuildSingleFieldSample firstField(String firstField) {'
+            + '\n' + '\tthis.firstField = firstField;'
+            + '\n' + '\treturn this;'
+            + '\n' + '}';
+        const indentedMethod =
+            '\t@Override'
+            + '\n\t' + 'public BuildSingleFieldSample firstField(String firstField) {'
+            + '\n\t' + '\tthis.firstField = firstField;'
+            + '\n\t' + '\treturn this;'
+            + '\n\t' + '}';
         expect(new Indenter().indent(method)).toEqual(indentedMethod);
     });
 

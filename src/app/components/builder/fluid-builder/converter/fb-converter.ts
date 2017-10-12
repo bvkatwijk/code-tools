@@ -1,7 +1,7 @@
 import { With } from './trait/with/fb-with';
-import { JavaParser } from "app/classes/parse/parse";
-import { Build } from "app/components/builder/fluid-builder/converter/trait/build/fb-build";
-import { Indenter } from "app/classes/indent/indenter";
+import { JavaParser } from 'app/classes/parse/parse';
+import { Build } from 'app/components/builder/fluid-builder/converter/trait/build/fb-build';
+import { Indenter } from 'app/classes/indent/indenter';
 
 
 export class FluidBuilderConverter {
@@ -9,12 +9,12 @@ export class FluidBuilderConverter {
     readonly indenter = new Indenter('    ');
 
     convert(value: string): string {
-        let result = new JavaParser(value);
+        const result = new JavaParser(value);
         const fields = result.getFields();
         const target = result.getName();
         const methods: string[] = [];
         const traits: string[] = [];
-        for (var i: number = 0; i < fields.length; i++) {
+        for (let i = 0; i < fields.length; i++) {
             if (fields[i + 1]) {
                 const nextWith = new With(fields[i].name, fields[i + 1].name, this.indenter);
                 methods.push(nextWith.method());

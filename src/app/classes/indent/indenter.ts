@@ -3,7 +3,7 @@ import { Whitespace } from '../whitespace/whitespace';
 export class Indenter {
 
     constructor(readonly indentation?: string) {
-        this.indentation = indentation || '\t'
+        this.indentation = indentation || '\t';
     }
 
     indent(code: string): string {
@@ -15,7 +15,7 @@ export class Indenter {
     }
 
     private trimEmpty(it: string): string {
-        if(it.trim() === '') {
+        if (it.trim() === '') {
             return '';
         }
         return it;
