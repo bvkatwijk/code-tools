@@ -1,3 +1,4 @@
+import { capitalize } from '../../../../../../classes/capitalize/capitalizer';
 import { Indenter } from '../../../../../../classes/indent/indenter';
 
 export class Build {
@@ -6,12 +7,8 @@ export class Build {
         readonly target: string,
         readonly indenter?: Indenter
     ) {
-        this.target = this.capitalize(target);
+        this.target = capitalize(target);
         this.indenter = indenter || new Indenter();
-    }
-
-    private capitalize(value: string) {
-        return value.charAt(0).toUpperCase() + value.slice(1);
     }
 
     trait(): string {
