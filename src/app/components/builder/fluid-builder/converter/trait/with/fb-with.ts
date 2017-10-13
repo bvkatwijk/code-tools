@@ -13,8 +13,12 @@ export class With implements TraitAndMethod {
         this.indenter = indenter || new Indenter();
     }
 
+    getType(): string {
+        return 'With' + capitalize(this.fieldName);
+    }
+
     trait(): string {
-        return 'public static interface With' + capitalize(this.fieldName) + ' {'
+        return 'public static interface ' + this.getType() + ' {'
             + '\n' + this.indenter.indent('public ' + this.targetType + ' ' + this.fieldName + '(String ' + this.fieldName + ');')
             + '\n}';
     }
