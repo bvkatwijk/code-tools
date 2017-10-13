@@ -12,9 +12,8 @@ export class FluidBuilderConverter {
 
     convert(value: string): string {
         const result = new JavaClass(value);
-        const pack: Package = result.getPackage();
         const fields = result.getFields();
-        const target = result.getName();
+        const sourceType = result.getName();
 
         const methods: string[] = [];
         const traits: string[] = [];
@@ -24,16 +23,16 @@ export class FluidBuilderConverter {
                 methods.push(nextWith.method());
                 traits.push(nextWith.trait());
             } else {
-                const nextWith = new With(fields[i].name, 'Build' + target, this.indenter);
+                const nextWith = new With(fields[i].name, 'Build' + sourceType, this.indenter);
                 methods.push(nextWith.method());
                 traits.push(nextWith.trait());
             }
         }
 
-        const targetBuild = new Build(target, this.indenter);
+        const targetBuild = new Build(sourceType, this.indenter);
 
         return [
-            pack.getDeclaration(),
+            result.getPackage().getDeclaration(),
             result.getImport().getStatement(),
             this.sourceClassDeclaration(),
             this.sourceClassBody(fields, methods, targetBuild, traits),
