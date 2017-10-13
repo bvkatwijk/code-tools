@@ -13,11 +13,16 @@ export class StringHelper {
         expect(oneLines.length).toEqual(otherLines.length);
 
         for (let i = 0; i < oneLines.length; i++) {
+            this.assertLineEquals(i, oneLines[i], otherLines[i]);
         }
     }
 
+    private assertLineEquals(line: number, expected: string, actual: string): void {
+        expect(this.render(line, expected)).toEqual(this.render(line, actual));
     }
 
+    private render(line: number, value: string): string {
+        return '[line ' + line + ']' + this.showWhitespace(value);
     }
 
     private showWhitespace(value: string): string {
