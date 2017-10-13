@@ -1,6 +1,6 @@
-import { Import } from "app/components/builder/fluid-builder/converter/import/import";
+import { Import } from 'app/components/builder/fluid-builder/converter/import/import';
 
-describe("Import", () => {
+describe('Import', () => {
 
     const A = JSON.parse(`[
         {
@@ -71,7 +71,7 @@ describe("Import", () => {
         expect(new Import(abC).getStatement()).toEqual('import a.b.C;');
     });
 
-    describe("static", () => {
+    describe('static', () => {
 
         const staticAb = JSON.parse(`[
             {
