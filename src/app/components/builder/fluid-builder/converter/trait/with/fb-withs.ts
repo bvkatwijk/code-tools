@@ -6,7 +6,7 @@ import { JavaClass } from '../../../../../../classes/parse/parse';
 
 export class WithCreator {
 
-    readonly withs: With[]
+    readonly withs: With[];
 
     constructor(
         readonly indenter?: Indenter
@@ -22,8 +22,8 @@ export class WithCreator {
 
     // You would say there exists convenience for this...
     private getIndexArray(length: number): number[] {
-        var indices = [];
-        for (var i = 0; i < length; i++) {
+        const indices = [];
+        for (let i = 0; i < length; i++) {
             indices.push(i);
         }
         return indices;
