@@ -1,3 +1,4 @@
+import { capitalize } from '../../../../classes/capitalize/capitalizer';
 import { Package } from './pack/fb-pack';
 import { FluidBuilderClass } from './class/fb-class';
 import { Field } from '../../../../classes/parse/field/field';
@@ -15,17 +16,17 @@ export class FluidBuilderConverter {
         const fields = result.getFields();
         const sourceType = result.getName();
 
-        const methods: string[] = [];
         const traits: string[] = [];
+        const withs: With[] = [];
         for (let i = 0; i < fields.length; i++) {
             if (fields[i + 1]) {
-                const nextWith = new With(fields[i].name, fields[i + 1].name, this.indenter);
-                methods.push(nextWith.method());
+                const nextWith = new With(fields[i], 'With' + capitalize(fields[i + 1].name), this.indenter);
                 traits.push(nextWith.trait());
+                withs.push(nextWith);
             } else {
-                const nextWith = new With(fields[i].name, 'Build' + sourceType, this.indenter);
-                methods.push(nextWith.method());
+                const nextWith = new With(fields[i], 'Build' + sourceType, this.indenter);
                 traits.push(nextWith.trait());
+                withs.push(nextWith);
             }
         }
 
@@ -35,20 +36,9 @@ export class FluidBuilderConverter {
             result.getPackage().getDeclaration(),
             result.getImport().getStatement(),
             this.sourceClassDeclaration(),
-            this.sourceClassBody(fields, methods, targetBuild, traits),
+            this.sourceClassBody(fields, withs, targetBuild),
             '}',
         ].join('\n\n') + '\n';
-    }
-
-    private builderClassDeclaration(fields: Field[], methods: string[], targetBuild: Build,): string {
-        return new FluidBuilderClass(this.indenter)
-            .declarationAndBody(fields, methods, targetBuild);
-    }
-
-    private builderMethodDeclaration(): string {
-        return 'public static WithFirstField builder() {'
-            + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
-            + '\n}';
     }
 
     private sourceClassDeclaration(): string {
@@ -56,14 +46,25 @@ export class FluidBuilderConverter {
             + '\npublic class SingleFieldSample {';
     }
 
-    private sourceClassBody(fields: Field[], methods: string[], targetBuild: Build, traits: any[]): string {
+    private sourceClassBody(fields: Field[], withs: With[], targetBuild: Build): string {
         return this.indenter.indent([
             this.immutableFieldDeclarations(fields),
             this.builderMethodDeclaration(),
-            this.builderClassDeclaration(fields, methods, targetBuild),
-            traits.join('\n\n'),
+            this.builderClassDeclaration(fields, withs, targetBuild),
+            withs.map(it => it.trait()).join('\n\n'),
             targetBuild.trait()
         ].join('\n\n'));
+    }
+
+    private builderClassDeclaration(fields: Field[], withs: With[], targetBuild: Build, ): string {
+        return new FluidBuilderClass(this.indenter)
+            .declarationAndBody(fields, withs, targetBuild);
+    }
+
+    private builderMethodDeclaration(): string {
+        return 'public static WithFirstField builder() {'
+            + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
+            + '\n}';
     }
 
     private immutableFieldDeclarations(fields: Field[]): string {
