@@ -1,6 +1,6 @@
 import { Package } from './fb-pack';
 
-describe("Package", () => {
+describe('Package', () => {
 
     const a = JSON.parse(`{
         "node": "PackageDeclaration",
