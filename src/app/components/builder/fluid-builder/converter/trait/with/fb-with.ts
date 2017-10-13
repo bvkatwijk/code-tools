@@ -19,7 +19,8 @@ export class With implements TraitAndMethod {
 
     trait(): string {
         return 'public static interface ' + this.getType() + ' {'
-            + '\n' + this.indenter.indent('public ' + this.targetType + ' ' + this.field.name + '(' + this.field.type + ' ' + this.field.name + ');')
+            + '\n' + this.indenter.indent(
+                'public ' + this.targetType + ' ' + this.field.name + '(' + this.field.type + ' ' + this.field.name + ');')
             + '\n}';
     }
 

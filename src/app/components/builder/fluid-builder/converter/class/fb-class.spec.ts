@@ -9,11 +9,11 @@ import { FluidBuilderClass } from './fb-class';
 
 describe('Fluid Builder Class', () => {
 
-    let indenter = new Indenter('    ');
-    let field = new Field(PRIVATE, false, 'String', 'firstField');
+    const indenter = new Indenter('    ');
+    const field = new Field(PRIVATE, false, 'String', 'firstField');
 
     describe('single field', () => {
-        let target = `/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
+        const target = `/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
 public static class SingleFieldSampleBuilder implements WithFirstField, BuildSingleFieldSample {
 
     private String firstField;
@@ -29,7 +29,7 @@ public static class SingleFieldSampleBuilder implements WithFirstField, BuildSin
         return new SingleFieldSample(firstField);
     }
 
-}`
+}`;
 
         it('should generate builder class correctly', () => {
             new StringHelper().assertEquals(
@@ -48,8 +48,8 @@ public static class SingleFieldSampleBuilder implements WithFirstField, BuildSin
 
     describe('two private fields', () => {
 
-        let secondField = new Field(PRIVATE, false, 'Integer', 'aNumber');
-        let target = `/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
+        const secondField = new Field(PRIVATE, false, 'Integer', 'aNumber');
+        const target = `/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
 public static class SingleFieldSampleBuilder implements WithFirstField, WithANumber, BuildSingleFieldSample {
 
     private String firstField;
@@ -72,7 +72,7 @@ public static class SingleFieldSampleBuilder implements WithFirstField, WithANum
         return new SingleFieldSample(firstField, aNumber);
     }
 
-}`
+}`;
 
         it('should generate builder class correctly', () => {
             new StringHelper().assertEquals(
