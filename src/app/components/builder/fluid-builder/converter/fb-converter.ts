@@ -51,10 +51,6 @@ export class FluidBuilderConverter {
             + '\n}';
     }
 
-    private importStatements(): string {
-        return 'import lombok.Value;';
-    }
-
     private sourceClassDeclaration(): string {
         return '@Value'
             + '\npublic class SingleFieldSample {';
