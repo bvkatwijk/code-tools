@@ -13,8 +13,17 @@ export class StringHelper {
         expect(oneLines.length).toEqual(otherLines.length);
 
         for (let i = 0; i < oneLines.length; i++) {
-            expect('[line ' + i + ']' + this.whitespace.show(oneLines[i])).toEqual('[line ' + i + ']' + this.whitespace.show(otherLines[i]));
         }
+    }
+
+    }
+
+    }
+
+    private showWhitespace(value: string): string {
+        return this
+            .whitespace
+            .show(value);
     }
 
     private lines(value: string): string[] {
