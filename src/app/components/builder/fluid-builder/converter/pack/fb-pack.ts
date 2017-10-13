@@ -1,43 +1,19 @@
 import { JavaClass } from '../../../../../classes/parse/parse';
+import { Segments } from 'app/components/builder/fluid-builder/converter/segments/segments';
 
-export class Package {
+export class Package extends Segments {
 
     constructor(
         readonly packageJson: any
     ) {
-
+        super();
     }
 
     /**
      * return package declaration
      */
     getDeclaration(): string {
-        return 'package ' + this.getPackageName(this.packageJson.name) + ';';
-    }
-
-    private getPackageName(it: any): string {
-        return [it]
-            .map(it => this.getFromIdentifier(it))
-            .map(result => this.prependFromName(result, it))
-            .map(result => this.prependFromQualifier(result, it))[0];
-    }
-
-    private prependFromQualifier(packageName, it: any): string {
-        return it.qualifier
-            ? this.getPackageName(it.qualifier) + '.' + packageName
-            : packageName
-    }
-
-    private prependFromName(packageName: string, it: any): string {
-        return it.name
-            ? this.getPackageName(it.name) + packageName
-            : packageName;
-    }
-
-    private getFromIdentifier(it: any): string {
-        return it.identifier
-            ? it.identifier
-            : '';
+        return 'package ' + this.jsonToString(this.packageJson.name) + ';';
     }
 
 }
