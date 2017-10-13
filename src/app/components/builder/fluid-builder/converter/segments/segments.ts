@@ -4,8 +4,8 @@ export class Segments {
     /**
      * Convert json from javaparser to package path
      */
-    jsonToString(it: any): string {
-        return [it]
+    jsonToString(segment: any): string {
+        return [segment]
             .map(it => this.getFromIdentifier(it))
             .map(result => this.prependFromName(result, it))
             .map(result => this.prependFromQualifier(result, it))[0];
@@ -14,7 +14,7 @@ export class Segments {
     private prependFromQualifier(packageName, it: any): string {
         return it.qualifier
             ? this.jsonToString(it.qualifier) + '.' + packageName
-            : packageName
+            : packageName;
     }
 
     private prependFromName(packageName: string, it: any): string {
