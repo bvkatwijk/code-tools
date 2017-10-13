@@ -1,6 +1,8 @@
+import { Package } from '../../components/builder/fluid-builder/converter/pack/fb-pack';
 import { Field } from 'app/classes/parse/field/field';
 import { Visibility, PUBLIC, Visibilities } from 'app/classes/parse/visibility/visibility';
 import * as javaParser from 'java-parser';
+import { Import } from 'app/components/builder/fluid-builder/converter/import/import';
 
 export class JavaClass {
 
@@ -21,10 +23,16 @@ export class JavaClass {
             .map(it => this.toField(it));
     }
 
-    getPackage(): any {
-        return this
+    getPackage(): Package {
+        return new Package(this
             .result
-            .package;
+            .package);
+    }
+
+    getImport(): Import {
+        return new Import(this
+            .result
+            .imports);
     }
 
     getName(): string {

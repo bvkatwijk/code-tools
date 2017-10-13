@@ -73,7 +73,7 @@ public class SingleFieldSample {
 
         const source = `package com.some.other.pack;
 
-import lombok.Value;
+import some.other.Import;
 
 @Value
 public class SingleFieldSample {
@@ -85,7 +85,7 @@ public class SingleFieldSample {
 
         const target = `package com.some.other.pack;
 
-import lombok.Value;
+import some.other.Import;
 
 @Value
 public class SingleFieldSample {

@@ -12,7 +12,7 @@ export class FluidBuilderConverter {
 
     convert(value: string): string {
         const result = new JavaClass(value);
-        const pack = new Package(result.getPackage());
+        const pack: Package = result.getPackage();
         const fields = result.getFields();
         const target = result.getName();
 
@@ -34,7 +34,7 @@ export class FluidBuilderConverter {
 
         return [
             pack.getDeclaration(),
-            this.importStatements(),
+            result.getImport().getStatement(),
             this.sourceClassDeclaration(),
             this.sourceClassBody(fields, methods, targetBuild, traits),
             '}',
