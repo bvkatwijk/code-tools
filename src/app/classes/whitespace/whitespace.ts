@@ -5,13 +5,6 @@
 export class Whitespace {
 
     /**
-     * Print supplied text with displayed whitespace characters
-     */
-    print(value: string): void {
-        console.log(this.show(value));
-    }
-
-    /**
      * Convert supplied text to displayed whitespace characters
      */
     show(value: string): string {
