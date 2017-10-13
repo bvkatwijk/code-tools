@@ -6,7 +6,6 @@ import { JavaClass } from 'app/classes/parse/parse';
 import { Build } from 'app/components/builder/fluid-builder/converter/trait/build/fb-build';
 import { Indenter } from 'app/classes/indent/indenter';
 
-
 export class FluidBuilderConverter {
 
     readonly indenter = new Indenter('    ');
