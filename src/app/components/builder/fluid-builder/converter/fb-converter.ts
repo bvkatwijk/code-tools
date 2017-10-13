@@ -6,6 +6,7 @@ import { With } from './trait/with/fb-with';
 import { JavaClass } from 'app/classes/parse/parse';
 import { Build } from 'app/components/builder/fluid-builder/converter/trait/build/fb-build';
 import { Indenter } from 'app/classes/indent/indenter';
+import { WithCreator } from 'app/components/builder/fluid-builder/converter/trait/with/fb-withs';
 
 export class FluidBuilderConverter {
 
@@ -41,18 +42,8 @@ export class FluidBuilderConverter {
     }
 
     private createWiths(source: JavaClass): With[] {
-        const fields = source.getFields();
-        const withs: With[] = [];
-        for (let i = 0; i < fields.length; i++) {
-            if (fields[i + 1]) {
-                const nextWith = new With(fields[i], 'With' + capitalize(fields[i + 1].name), this.indenter);
-                withs.push(nextWith);
-            } else {
-                const nextWith = new With(fields[i], 'Build' + source.getName(), this.indenter);
-                withs.push(nextWith);
-            }
-        }
-        return withs;
+        return new WithCreator(this.indenter)
+            .getWiths(source);
     }
 
     private builderClassDeclaration(fields: Field[], withs: With[], targetBuild: Build, ): string {
