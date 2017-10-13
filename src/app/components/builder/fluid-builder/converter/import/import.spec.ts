@@ -141,4 +141,24 @@ describe("Import", () => {
 
     });
 
+    describe('wildcard', () => {
+
+        const aWildcard = JSON.parse(`[
+            {
+                "node": "ImportDeclaration",
+                "name": {
+                    "identifier": "a",
+                    "node": "SimpleName"
+                },
+                "static": false,
+                "onDemand": true
+            }
+        ]`);
+
+        it('should parse import a.B; import c.D', () => {
+            expect(new Import(aWildcard).getStatement()).toEqual('import a.*;');
+        });
+
+    });
+
 });

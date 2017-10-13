@@ -20,12 +20,18 @@ export class Import extends Segments {
     }
 
     private getSingleStatement(it: any) {
-        return 'import ' + this.isStatic(it) + this.jsonToString(it) + ';';
+        return 'import ' + this.isStatic(it) + this.jsonToString(it) + this.isWildcard(it) + ';';
     }
 
     private isStatic(it: any): string {
         return it.static
             ? 'static '
+            : '';
+    }
+
+    private isWildcard(it): string {
+        return it.onDemand
+            ? '.*'
             : '';
     }
 
