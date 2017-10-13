@@ -94,8 +94,51 @@ describe("Import", () => {
 
         it('should parse import static A.b;', () => {
             expect(new Import(staticAb).getStatement()).toEqual('import static A.b;');
-        })
+        });
 
-    })
+    });
+
+    describe('multiple', () => {
+
+        const aBAndcD = JSON.parse(`[
+            {
+                "node": "ImportDeclaration",
+                "name": {
+                    "node": "QualifiedName",
+                    "qualifier": {
+                        "identifier": "a",
+                        "node": "SimpleName"
+                    },
+                    "name": {
+                        "identifier": "B",
+                        "node": "SimpleName"
+                    }
+                },
+                "static": false,
+                "onDemand": false
+            },
+            {
+                "node": "ImportDeclaration",
+                "name": {
+                    "node": "QualifiedName",
+                    "qualifier": {
+                        "identifier": "c",
+                        "node": "SimpleName"
+                    },
+                    "name": {
+                        "identifier": "D",
+                        "node": "SimpleName"
+                    }
+                },
+                "static": false,
+                "onDemand": false
+            }
+        ]`);
+
+        it('should parse import a.B; import c.D', () => {
+            expect(new Import(aBAndcD).getStatement()).toEqual('import a.B;\nimport c.D;');
+        });
+
+    });
 
 });

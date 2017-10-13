@@ -4,7 +4,7 @@ import { Segments } from 'app/components/builder/fluid-builder/converter/segment
 export class Import extends Segments {
 
     constructor(
-        readonly importJson: any
+        readonly importJson: any[]
     ) {
         super();
     }
@@ -13,7 +13,14 @@ export class Import extends Segments {
      * return package declaration
      */
     getStatement(): string {
-        return 'import ' + this.isStatic(this.importJson[0]) + this.jsonToString(this.importJson[0]) + ';';
+        return this
+            .importJson
+            .map(it => this.getSingleStatement(it))
+            .join('\n');
+    }
+
+    private getSingleStatement(it: any) {
+        return 'import ' + this.isStatic(it) + this.jsonToString(it) + ';';
     }
 
     private isStatic(it: any): string {
