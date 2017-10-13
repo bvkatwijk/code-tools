@@ -7,14 +7,14 @@ export class Segments {
     jsonToString(segment: any): string {
         return [segment]
             .map(it => this.getFromIdentifier(it))
-            .map(result => this.prependFromName(result, it))
-            .map(result => this.prependFromQualifier(result, it))[0];
+            .map(result => this.prependFromName(result, segment))
+            .map(result => this.prependFromQualifier(result, segment))[0];
     }
 
-    private prependFromQualifier(packageName, it: any): string {
-        return it.qualifier
-            ? this.jsonToString(it.qualifier) + '.' + packageName
-            : packageName;
+    private getFromIdentifier(it: any): string {
+        return it.identifier
+            ? it.identifier
+            : '';
     }
 
     private prependFromName(packageName: string, it: any): string {
@@ -23,9 +23,10 @@ export class Segments {
             : packageName;
     }
 
-    private getFromIdentifier(it: any): string {
-        return it.identifier
-            ? it.identifier
-            : '';
+    private prependFromQualifier(packageName, it: any): string {
+        return it.qualifier
+            ? this.jsonToString(it.qualifier) + '.' + packageName
+            : packageName;
     }
+
 }
