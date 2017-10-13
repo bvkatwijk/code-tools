@@ -13,30 +13,12 @@ export class FluidBuilderConverter {
 
     convert(value: string): string {
         const result = new JavaClass(value);
-        const fields = result.getFields();
-        const sourceType = result.getName();
-
-        const traits: string[] = [];
-        const withs: With[] = [];
-        for (let i = 0; i < fields.length; i++) {
-            if (fields[i + 1]) {
-                const nextWith = new With(fields[i], 'With' + capitalize(fields[i + 1].name), this.indenter);
-                traits.push(nextWith.trait());
-                withs.push(nextWith);
-            } else {
-                const nextWith = new With(fields[i], 'Build' + sourceType, this.indenter);
-                traits.push(nextWith.trait());
-                withs.push(nextWith);
-            }
-        }
-
-        const targetBuild = new Build(sourceType, this.indenter);
 
         return [
             result.getPackage().getDeclaration(),
             result.getImport().getStatement(),
             this.sourceClassDeclaration(),
-            this.sourceClassBody(fields, withs, targetBuild),
+            this.sourceClassBody(result),
             '}',
         ].join('\n\n') + '\n';
     }
@@ -46,14 +28,31 @@ export class FluidBuilderConverter {
             + '\npublic class SingleFieldSample {';
     }
 
-    private sourceClassBody(fields: Field[], withs: With[], targetBuild: Build): string {
+    private sourceClassBody(source: JavaClass): string {
+        const withs = this.createWiths(source);
+        const build = new Build(source.getName(), this.indenter);
         return this.indenter.indent([
-            this.immutableFieldDeclarations(fields),
+            this.immutableFieldDeclarations(source.getFields()),
             this.builderMethodDeclaration(),
-            this.builderClassDeclaration(fields, withs, targetBuild),
+            this.builderClassDeclaration(source.getFields(), withs, build),
             withs.map(it => it.trait()).join('\n\n'),
-            targetBuild.trait()
+            build.trait()
         ].join('\n\n'));
+    }
+
+    private createWiths(source: JavaClass): With[] {
+        const fields = source.getFields();
+        const withs: With[] = [];
+        for (let i = 0; i < fields.length; i++) {
+            if (fields[i + 1]) {
+                const nextWith = new With(fields[i], 'With' + capitalize(fields[i + 1].name), this.indenter);
+                withs.push(nextWith);
+            } else {
+                const nextWith = new With(fields[i], 'Build' + source.getName(), this.indenter);
+                withs.push(nextWith);
+            }
+        }
+        return withs;
     }
 
     private builderClassDeclaration(fields: Field[], withs: With[], targetBuild: Build, ): string {
