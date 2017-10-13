@@ -13,7 +13,7 @@ import lombok.Value;
 
 @Value
 public class SingleFieldSample {
-    
+
     private final String firstField;
 
 }
@@ -77,8 +77,9 @@ import some.other.Import;
 
 @Value
 public class SingleFieldSample {
-    
+
     private final String firstField;
+    private final Integer aNumber;
 
 }
 `;
@@ -91,31 +92,43 @@ import some.other.Import;
 public class SingleFieldSample {
 
     private final String firstField;
+    private final Integer aNumber;
 
     public static WithFirstField builder() {
         return new SingleFieldSampleBuilder();
     }
 
     /** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
-    public static class SingleFieldSampleBuilder implements WithFirstField, BuildSingleFieldSample {
+    public static class SingleFieldSampleBuilder implements WithFirstField, WithANumber, BuildSingleFieldSample {
 
         private String firstField;
+        private Integer aNumber;
 
         @Override
-        public BuildSingleFieldSample firstField(String firstField) {
+        public WithANumber firstField(String firstField) {
             this.firstField = firstField;
             return this;
         }
 
         @Override
+        public BuildSingleFieldSample aNumber(Integer aNumber) {
+            this.aNumber = aNumber;
+            return this;
+        }
+
+        @Override
         public SingleFieldSample build() {
-            return new SingleFieldSample(firstField);
+            return new SingleFieldSample(firstField, aNumber);
         }
 
     }
 
     public static interface WithFirstField {
-        public BuildSingleFieldSample firstField(String firstField);
+        public WithANumber firstField(String firstField);
+    }
+
+    public static interface WithANumber {
+        public BuildSingleFieldSample aNumber(Integer aNumber);
     }
 
     public static interface BuildSingleFieldSample {
