@@ -1,3 +1,5 @@
+import { PUBLIC } from '../../../../../../classes/parse/visibility/visibility';
+import { Field } from '../../../../../../classes/parse/field/field';
 import { Indenter } from '../../../../../../classes/indent/indenter';
 import { With } from './fb-with';
 
@@ -5,7 +7,7 @@ describe('With', () => {
 
     describe('field=fieldName and target=TypeName', () => {
 
-        const withIt = new With('fieldName', 'TypeName');
+        const withIt = new With(new Field(PUBLIC, false, 'String', 'fieldName'), 'TypeName');
 
         it('should generate type equal to WithFieldName', () => {
             expect(withIt.getType()).toEqual('WithFieldName');
@@ -31,7 +33,7 @@ describe('With', () => {
 
     describe('field=firstField and target=BuildSingleFieldSample', () => {
 
-        const withIt = new With('firstField', 'BuildSingleFieldSample');
+        const withIt = new With(new Field(PUBLIC, false, 'String', 'firstField'), 'BuildSingleFieldSample');
 
         it('should generate type equal to WithFirstField', () => {
             expect(withIt.getType()).toEqual('WithFirstField');
@@ -57,7 +59,7 @@ describe('With', () => {
 
     describe('field=firstField and target=TypeName', () => {
 
-        const withIt = new With('firstField', 'TypeName');
+        const withIt = new With(new Field(PUBLIC, false, 'String', 'firstField'), 'TypeName');
 
         it('should generate type equal to WithFirstField', () => {
             expect(withIt.getType()).toEqual('WithFirstField');
@@ -83,7 +85,7 @@ describe('With', () => {
 
     describe('using custom indenter', () => {
 
-        const withIt = new With('firstField', 'BuildSingleFieldSample', new Indenter('    '));
+        const withIt = new With(new Field(PUBLIC, false, 'String', 'firstField'), 'BuildSingleFieldSample', new Indenter('    '));
 
         it('generates custom indented trait', () => {
             expect(withIt.trait()).toEqual(
