@@ -6,7 +6,7 @@ import { Field } from '../../../../../../classes/parse/field/field';
 export class With implements TraitAndMethod {
 
     constructor(
-        readonly fieldName: string,
+        readonly field: Field,
         readonly targetType: string,
         readonly indenter?: Indenter,
     ) {
@@ -14,19 +14,19 @@ export class With implements TraitAndMethod {
     }
 
     getType(): string {
-        return 'With' + capitalize(this.fieldName);
+        return 'With' + capitalize(this.field.name);
     }
 
     trait(): string {
         return 'public static interface ' + this.getType() + ' {'
-            + '\n' + this.indenter.indent('public ' + this.targetType + ' ' + this.fieldName + '(String ' + this.fieldName + ');')
+            + '\n' + this.indenter.indent('public ' + this.targetType + ' ' + this.field.name + '(' + this.field.type + ' ' + this.field.name + ');')
             + '\n}';
     }
 
     method(): string {
         return '@Override'
-            + '\npublic ' + this.targetType + ' ' + this.fieldName + '(String ' + this.fieldName + ') {'
-            + '\n' + this.indenter.indent('this.' + this.fieldName + ' = ' + this.fieldName + ';')
+            + '\npublic ' + this.targetType + ' ' + this.field.name + '(' + this.field.type + ' ' + this.field.name + ') {'
+            + '\n' + this.indenter.indent('this.' + this.field.name + ' = ' + this.field.name + ';')
             + '\n' + this.indenter.indent('return this;')
             + '\n}';
     }
