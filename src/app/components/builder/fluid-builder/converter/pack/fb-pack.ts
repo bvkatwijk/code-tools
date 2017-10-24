@@ -1,5 +1,5 @@
 import { JavaClass } from '../../../../../classes/parse/parse';
-import { Segments } from 'app/components/builder/fluid-builder/converter/segments/segments';
+import { Segments } from '../segments/segments';
 
 export class Package extends Segments {
 

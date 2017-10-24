@@ -3,10 +3,10 @@ import { Package } from './pack/fb-pack';
 import { FluidBuilderClass } from './class/fb-class';
 import { Field } from '../../../../classes/parse/field/field';
 import { With } from './trait/with/fb-with';
-import { JavaClass } from 'app/classes/parse/parse';
-import { Build } from 'app/components/builder/fluid-builder/converter/trait/build/fb-build';
-import { Indenter } from 'app/classes/indent/indenter';
-import { WithCreator } from 'app/components/builder/fluid-builder/converter/trait/with/fb-withs';
+import { JavaClass } from '../../../../classes/parse/parse';
+import { Build } from './trait/build/fb-build';
+import { Indenter } from '../../../../classes/indent/indenter';
+import { WithCreator } from '../../../../components/builder/fluid-builder/converter/trait/with/fb-withs';
 
 export class FluidBuilderConverter {
 

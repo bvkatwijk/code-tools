@@ -1,4 +1,4 @@
-import { Import } from 'app/components/builder/fluid-builder/converter/import/import';
+import { Import } from './import';
 
 describe('Import', () => {
 

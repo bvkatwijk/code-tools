@@ -1,4 +1,4 @@
-import { Visibilities, PUBLIC, PRIVATE, PROTECTED, DEFAULT, Visibility } from 'app/classes/parse/visibility/visibility';
+import { Visibilities, PUBLIC, PRIVATE, PROTECTED, DEFAULT, Visibility } from '../../parse/visibility/visibility';
 
 describe('Visibility Finder', () => {
 
