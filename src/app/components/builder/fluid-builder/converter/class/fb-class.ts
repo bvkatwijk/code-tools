@@ -11,9 +11,9 @@ export class FluidBuilderClass {
         this.indenter = indenter || new Indenter();
     }
 
-    declarationAndBody(fields: Field[], withs: With[], targetBuild: Build): string {
+    declarationAndBody(classname: string, fields: Field[], withs: With[], targetBuild: Build): string {
         return [
-            this.builderClassDeclaration(withs),
+            this.builderClassDeclaration(classname, withs, targetBuild),
             this.builderClassBody(
                 fields,
                 withs.map(it => it.method()),
@@ -22,15 +22,15 @@ export class FluidBuilderClass {
         ].join('\n\n');
     }
 
-    private builderClassDeclaration(withs: With[]): string {
+    private builderClassDeclaration(classname: string, withs: With[], targetBuild: Build): string {
         return '/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */'
-            + '\npublic static class SingleFieldSampleBuilder implements ' + this.getWithTypes(withs) + ' {';
+            + '\npublic static class ' + classname + 'Builder implements ' + this.getWithTypes(withs, targetBuild) + ' {';
     }
 
-    private getWithTypes(withs: With[]): string {
+    private getWithTypes(withs: With[], targetBuild: Build): string {
         return withs
             .map(it => it.getType())
-            .join(', ') + ', BuildSingleFieldSample';
+            .join(', ') + ', ' + targetBuild.getType();
     }
 
     private builderClassBody(fields: Field[], methods: string[], targetBuild: Build): string {

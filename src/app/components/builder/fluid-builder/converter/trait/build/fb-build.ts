@@ -11,6 +11,10 @@ export class Build {
         this.indenter = indenter || new Indenter();
     }
 
+    getType(): string {
+        return 'Build' + capitalize(this.target);
+    }
+
     trait(): string {
         return 'public static interface Build' + this.target + ' {'
             + '\n' + this.indenter.indent('public ' + this.target + ' build();')

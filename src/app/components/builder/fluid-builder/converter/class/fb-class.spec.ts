@@ -34,6 +34,7 @@ public static class SingleFieldSampleBuilder implements WithFirstField, BuildSin
         it('should generate builder class correctly', () => {
             new StringHelper().assertEquals(
                 new FluidBuilderClass(indenter).declarationAndBody(
+                    'SingleFieldSample',
                     [
                         field
                     ],
@@ -50,7 +51,7 @@ public static class SingleFieldSampleBuilder implements WithFirstField, BuildSin
 
         const secondField = new Field(PRIVATE, false, 'Integer', 'aNumber');
         const target = `/** 2017-08-06 Generated Fluid Builder github.com/bvkatwijk/fluid-builder-generator */
-public static class SingleFieldSampleBuilder implements WithFirstField, WithANumber, BuildSingleFieldSample {
+public static class TwoFieldClassBuilder implements WithFirstField, WithANumber, BuildTwoFieldClass {
 
     private String firstField;
     private Integer aNumber;
@@ -62,14 +63,14 @@ public static class SingleFieldSampleBuilder implements WithFirstField, WithANum
     }
 
     @Override
-    public BuildSingleFieldSample aNumber(Integer aNumber) {
+    public BuildTwoFieldClass aNumber(Integer aNumber) {
         this.aNumber = aNumber;
         return this;
     }
 
     @Override
-    public SingleFieldSample build() {
-        return new SingleFieldSample(firstField, aNumber);
+    public TwoFieldClass build() {
+        return new TwoFieldClass(firstField, aNumber);
     }
 
 }`;
@@ -77,14 +78,15 @@ public static class SingleFieldSampleBuilder implements WithFirstField, WithANum
         it('should generate builder class correctly', () => {
             new StringHelper().assertEquals(
                 new FluidBuilderClass(indenter).declarationAndBody(
+                    'TwoFieldClass',
                     [
                         field,
                         secondField],
                     [
                         new With(field, 'With' + capitalize(secondField.name), indenter),
-                        new With(secondField, 'BuildSingleFieldSample', indenter)
+                        new With(secondField, 'BuildTwoFieldClass', indenter)
                     ],
-                    new Build('SingleFieldSample', indenter)),
+                    new Build('TwoFieldClass', indenter)),
                 target);
         });
 
