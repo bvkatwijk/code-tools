@@ -22,8 +22,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng test --single-run --code-coverage
-  - ng e2e --progress false
+  - ng test --watch=false --code-coverage
 
 after_success:
    - bash <(curl -s https://codecov.io/bash)
