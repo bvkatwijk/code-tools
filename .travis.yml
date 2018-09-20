@@ -22,7 +22,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng test --single-run --code-coverage --progress false
+  - ng test --single-run --code-coverage
   - ng e2e --progress false
 
 after_success:
