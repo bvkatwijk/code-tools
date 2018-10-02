@@ -57,6 +57,10 @@ export class FluidBuilderConverter {
             + '\n}';
     }
 
+    public withFirstField(fields: Field[]): any {
+        return fields[0].withInterfaceName();
+    }
+
     private immutableFieldDeclarations(fields: Field[]): string {
         return fields
             .map(it => it.immutableDeclaration())
