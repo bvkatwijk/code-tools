@@ -34,7 +34,7 @@ export class FluidBuilderConverter {
         const build = new Build(source.getName(), this.indenter);
         return this.indenter.indent([
             this.immutableFieldDeclarations(source.getFields()),
-            this.builderMethodDeclaration(),
+            this.builderMethodDeclaration(source.getFields(), source.getName()),
             this.builderClassDeclaration(source.getName(), source.getFields(), withs, build),
             withs.map(it => it.trait()).join('\n\n'),
             build.trait()
@@ -51,9 +51,9 @@ export class FluidBuilderConverter {
             .declarationAndBody(className, fields, withs, targetBuild);
     }
 
-    private builderMethodDeclaration(): string {
-        return 'public static WithFirstField builder() {'
-            + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
+    private builderMethodDeclaration(fields: Field[], className: string): string {
+        return 'public static ' + this.withFirstField(fields) + ' builder() {'
+            + '\n' + this.indenter.indent('return new ' + className + 'Builder();')
             + '\n}';
     }
 
