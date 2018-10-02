@@ -16,17 +16,38 @@ export class FluidBuilderConverter {
         const result = new JavaClass(value);
 
         return [
-            result.getPackage().getDeclaration(),
-            result.getImport().getStatement(),
-            this.sourceClassDeclaration(),
+            this.sourcePackageDeclaration(result),
+            this.sourceImports(result),,
+            this.sourceClassDeclaration(result),
             this.sourceClassBody(result),
             '}',
-        ].join('\n\n') + '\n';
+        ]
+        .filter(string => string !== '')
+        .join('\n\n') + '\n';
     }
 
-    private sourceClassDeclaration(): string {
-        return '@Value'
-            + '\npublic class SingleFieldSample {';
+    private sourceImports(result: JavaClass) {
+        return result
+            .getImport()
+            .getStatement();
+    }
+
+    private sourceClassAnnotations(result: JavaClass) {
+        return result.getAnnotations()
+            .map(it => it.value);
+    }
+
+    private sourcePackageDeclaration(result: JavaClass) {
+        return result.getPackage().getDeclaration();
+    }
+
+    private sourceClassDeclaration(source: JavaClass): string {
+        return [
+            this.sourceClassAnnotations(source),
+            'public class ' + source.getName() + ' {'
+        ]
+        .filter(it => it !== '')
+        .join('\n');
     }
 
     private sourceClassBody(source: JavaClass): string {
