@@ -1,5 +1,6 @@
 import { capitalize } from '../../../../../../classes/capitalize/capitalizer';
 import { Indenter } from '../../../../../../classes/indent/indenter';
+import { It } from '../../../../../../classes/it/it';
 
 export class Build {
 
@@ -12,7 +13,10 @@ export class Build {
     }
 
     getType(): string {
-        return 'Build' + capitalize(this.target);
+        return It.is(this.target)
+            .map(capitalize)
+            .map(it => 'Build' + it)
+            .get();
     }
 
     trait(): string {
