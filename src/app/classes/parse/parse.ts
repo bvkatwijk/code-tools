@@ -3,6 +3,7 @@ import { Field } from 'app/classes/parse/field/field';
 import { Visibility, PUBLIC, Visibilities } from 'app/classes/parse/visibility/visibility';
 import * as javaParser from 'java-parser';
 import { Import } from 'app/components/builder/fluid-builder/converter/import/import';
+import { Annotation } from './annotation/annotation';
 
 export class JavaClass {
 
@@ -12,6 +13,15 @@ export class JavaClass {
         readonly source: string
     ) {
         this.result = javaParser.parse(source);
+    }
+
+    getAnnotations(): Array<Annotation> {
+        return this
+            .result
+            .types[0]
+            .modifiers
+            .filter(it => it.node === 'MarkerAnnotation')
+            .map(it => this.toAnnotation(it));
     }
 
     getFields(): Array<Field> {
@@ -56,4 +66,7 @@ export class JavaClass {
         );
     }
 
+    private toAnnotation(node: any): Annotation {
+        return new Annotation('@' + node.typeName.identifier);
+    }
 }

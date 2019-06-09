@@ -13,7 +13,7 @@ export class Package extends Segments {
      * return package declaration
      */
     getDeclaration(): string {
-        return 'package ' + this.jsonToString(this.packageJson.name) + ';';
+        return this.packageJson ? 'package ' + this.jsonToString(this.packageJson.name) + ';' : '';
     }
 
 }

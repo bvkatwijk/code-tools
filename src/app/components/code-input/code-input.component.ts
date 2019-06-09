@@ -12,7 +12,9 @@ export class CodeInputComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.codeChange.emit(this.code);
+  }
 
   setCode(code: string) {
     this.code = code;

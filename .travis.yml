@@ -3,7 +3,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - '6.9'
+  - '8.9'
 
 addons:
 apt:
@@ -22,8 +22,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng test --single-run --code-coverage --progress false
-  - ng e2e --progress false
+  - ng test --watch=false --code-coverage
 
 after_success:
    - bash <(curl -s https://codecov.io/bash)

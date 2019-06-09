@@ -43,12 +43,6 @@ export class FluidBuilderClass {
             ].join('\n\n'));
     }
 
-    private builderMethodDeclaration(): string {
-        return 'public static WithFirstField builder() {'
-            + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
-            + '\n}';
-    }
-
     private mutableFieldDeclarations(fields: Field[]): string {
         return fields
             .map(it => it.mutableDeclaration())

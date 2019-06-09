@@ -5,13 +5,8 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './code-output.component.html',
   styleUrls: ['./code-output.component.css']
 })
-export class CodeOutputComponent implements OnInit {
+export class CodeOutputComponent {
 
   @Input() code;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

@@ -16,17 +16,38 @@ export class FluidBuilderConverter {
         const result = new JavaClass(value);
 
         return [
-            result.getPackage().getDeclaration(),
-            result.getImport().getStatement(),
-            this.sourceClassDeclaration(),
+            this.sourcePackageDeclaration(result),
+            this.sourceImports(result),,
+            this.sourceClassDeclaration(result),
             this.sourceClassBody(result),
             '}',
-        ].join('\n\n') + '\n';
+        ]
+        .filter(string => string !== '')
+        .join('\n\n') + '\n';
     }
 
-    private sourceClassDeclaration(): string {
-        return '@Value'
-            + '\npublic class SingleFieldSample {';
+    private sourceImports(result: JavaClass) {
+        return result
+            .getImport()
+            .getStatement();
+    }
+
+    private sourceClassAnnotations(result: JavaClass) {
+        return result.getAnnotations()
+            .map(it => it.value);
+    }
+
+    private sourcePackageDeclaration(result: JavaClass) {
+        return result.getPackage().getDeclaration();
+    }
+
+    private sourceClassDeclaration(source: JavaClass): string {
+        return [
+            this.sourceClassAnnotations(source),
+            'public class ' + source.getName() + ' {'
+        ]
+        .filter(it => it !== '')
+        .join('\n');
     }
 
     private sourceClassBody(source: JavaClass): string {
@@ -34,7 +55,7 @@ export class FluidBuilderConverter {
         const build = new Build(source.getName(), this.indenter);
         return this.indenter.indent([
             this.immutableFieldDeclarations(source.getFields()),
-            this.builderMethodDeclaration(),
+            this.builderMethodDeclaration(source.getFields(), source.getName()),
             this.builderClassDeclaration(source.getName(), source.getFields(), withs, build),
             withs.map(it => it.trait()).join('\n\n'),
             build.trait()
@@ -51,10 +72,14 @@ export class FluidBuilderConverter {
             .declarationAndBody(className, fields, withs, targetBuild);
     }
 
-    private builderMethodDeclaration(): string {
-        return 'public static WithFirstField builder() {'
-            + '\n' + this.indenter.indent('return new SingleFieldSampleBuilder();')
+    private builderMethodDeclaration(fields: Field[], className: string): string {
+        return 'public static ' + this.withFirstField(fields) + ' builder() {'
+            + '\n' + this.indenter.indent('return new ' + className + 'Builder();')
             + '\n}';
+    }
+
+    public withFirstField(fields: Field[]): any {
+        return fields[0].withInterfaceName();
     }
 
     private immutableFieldDeclarations(fields: Field[]): string {

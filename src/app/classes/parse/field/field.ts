@@ -1,4 +1,5 @@
 import { Visibility } from '../visibility/visibility';
+import { capitalize } from '../../capitalize/capitalizer';
 
 export class Field {
 
@@ -21,6 +22,10 @@ export class Field {
 
     mutableDeclaration(): string {
         return this.visibility.name + ' ' + this.type + ' ' + this.name + ';';
+    }
+
+    withInterfaceName(): string {
+        return 'With' + capitalize(this.name);
     }
 
 }
